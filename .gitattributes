@@ -1,0 +1,7 @@
+# Единый формат переносов строк (LF) — убирает предупреждения «LF will be replaced by CRLF»
+* text=auto eol=lf
+*.jpg binary
+*.png binary
+*.webp binary
+*.mp4 binary
+*.woff2 binary

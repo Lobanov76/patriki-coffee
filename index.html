@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="utf-8">
@@ -6,6 +6,8 @@
   <title>Патрики — кофейня в Ташкенте, 24/7</title>
   <meta name="description" content="Патрики — круглосуточная кофейня в Ташкенте на Тараса Шевченко, 8, и мини-точки Monte by Patriki с кофе с собой. Кофе, чай, лимонады, выпечка и цитаты на меловой доске.">
   <meta name="theme-color" content="#120d0b">
+  <!-- Концепт: не показывать в поиске, пока сайт не переедет на домен кофейни. Тогда эту строку убрать. -->
+  <meta name="robots" content="noindex, nofollow">
 
   <!-- Иконки -->
   <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
@@ -23,10 +25,14 @@
   <meta property="og:locale" content="ru_RU">
   <meta name="twitter:card" content="summary_large_image">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Forum&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20">
+  <!-- Защита: странице разрешено загружать скрипты, стили, шрифты, фото и видео только с этого же сайта.
+       Даже если кто-то подсунет чужой код, браузер его не выполнит. -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' data:; media-src 'self'; connect-src 'self'; object-src 'none'; frame-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests">
+  <!-- Внешним сайтам (Яндекс Карты, Instagram) передаётся только адрес сайта, без конкретной страницы -->
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+
+  <link rel="stylesheet" href="fonts/fonts.css">
+  <link rel="stylesheet" href="styles.css?v=22">
 </head>
 <body>
   <a class="skip" href="#menu">Перейти к меню</a>
@@ -42,13 +48,13 @@
         <li><a class="roll" href="#places"><span data-text="Адреса">Адреса</span></a></li>
       </ul>
     </nav>
-    <a class="topbar__phone" href="tel:+998900030033">+998 90 003 00 33</a>
+    <a class="topbar__phone" href="tel:+998900030033">+998&nbsp;90&nbsp;003&nbsp;00&nbsp;33</a>
   </header>
 
   <main id="top">
     <!-- Первый экран: живое видео эспрессо и неон поверх -->
     <section class="hero">
-      <video class="hero__video" autoplay muted loop playsinline preload="auto" poster="video/espresso-poster.jpg" aria-hidden="true">
+      <video class="hero__video" muted loop playsinline preload="auto" poster="video/espresso-poster.jpg" aria-hidden="true">
         <source src="video/espresso.mp4" type="video/mp4">
       </video>
       <div class="hero__shade" aria-hidden="true"></div>
@@ -131,7 +137,7 @@
       </div>
 
       <div class="loop quotes__viewport">
-      <ul class="loop__track quotes__track" id="quotes-track" aria-label="Фото меловой доски с цитатами">
+      <ul class="loop__track quotes__track" id="quotes-track">
         <li class="shot">
           <img src="img/boards/board-burnout.jpg" alt="Ты не выгорел(а), ты просто горел(а) не там" width="601" height="930" loading="lazy">
         </li>
@@ -174,32 +180,32 @@
         <div class="loop reviews__viewport">
         <ul class="loop__track reviews__grid" id="reviews-track">
           <li class="review">
-            <span class="review__stars" aria-label="5 из 5">★★★★★</span>
+            <span class="review__stars" role="img" aria-label="5 из 5">★★★★★</span>
             <blockquote>Очень уютное и атмосферное место, куда хочется возвращаться снова и снова.</blockquote>
             <span class="review__name">Adelya A.</span>
           </li>
           <li class="review">
-            <span class="review__stars" aria-label="5 из 5">★★★★★</span>
+            <span class="review__stars" role="img" aria-label="5 из 5">★★★★★</span>
             <blockquote>Лучший кофе в городе! И атмосфера располагает на душевные разговоры.</blockquote>
             <span class="review__name">Юлия С.</span>
           </li>
           <li class="review">
-            <span class="review__stars" aria-label="5 из 5">★★★★★</span>
+            <span class="review__stars" role="img" aria-label="5 из 5">★★★★★</span>
             <blockquote>Креативные бодрящие наклейки на стакане и очень дружелюбный персонал.</blockquote>
             <span class="review__name">Evgeny G.</span>
           </li>
           <li class="review">
-            <span class="review__stars" aria-label="5 из 5">★★★★★</span>
+            <span class="review__stars" role="img" aria-label="5 из 5">★★★★★</span>
             <blockquote>Оригинальные стаканчики, которые всегда поднимают настроение.</blockquote>
             <span class="review__name">Нигина Р.</span>
           </li>
           <li class="review">
-            <span class="review__stars" aria-label="5 из 5">★★★★★</span>
+            <span class="review__stars" role="img" aria-label="5 из 5">★★★★★</span>
             <blockquote>Бамбл вишнёвый, с апельсином и чай с алоэ вера — мои фавориты.</blockquote>
             <span class="review__name">Ranius</span>
           </li>
           <li class="review">
-            <span class="review__stars" aria-label="5 из 5">★★★★★</span>
+            <span class="review__stars" role="img" aria-label="5 из 5">★★★★★</span>
             <blockquote>Самый любимый кофешоп! Классные баристы, классное руководство и лучшая матча.</blockquote>
             <span class="review__name">Samirakhon M.</span>
           </li>
@@ -388,7 +394,7 @@
     <!-- Адреса -->
     <section class="places" id="places" aria-labelledby="places-title">
       <h2 id="places-title" class="reveal">Где нас найти</h2>
-      <p class="places__lead reveal">Работаем круглосуточно. Телефон один на все точки: <a href="tel:+998900030033">+998 90 003 00 33</a>.</p>
+      <p class="places__lead reveal">Работаем круглосуточно. Телефон один на все точки: <a href="tel:+998900030033">+998&nbsp;90&nbsp;003&nbsp;00&nbsp;33</a>.</p>
 
       <!-- Единственная кофейня «Патрики» -->
       <div class="places__main reveal">
@@ -429,10 +435,10 @@
     <div class="footer__row">
       <span class="wordmark">Патрики</span>
       <a href="https://www.instagram.com/patriki.tut/" target="_blank" rel="noopener">Instagram @patriki.tut</a>
-      <a href="tel:+998900030033">+998 90 003 00 33</a>
+      <a href="tel:+998900030033">+998&nbsp;90&nbsp;003&nbsp;00&nbsp;33</a>
     </div>
   </footer>
 
-  <script src="script.js?v=17"></script>
+  <script src="script.js?v=22"></script>
 </body>
 </html>

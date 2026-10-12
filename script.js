@@ -1,3 +1,10 @@
+// ===== Защита от встраивания в чужой сайт =====
+// Мошенник может открыть наш сайт внутри своей страницы и подложить сверху невидимые кнопки.
+// Если страница открыта не напрямую, а внутри чужой, — выходим из неё на настоящий адрес.
+if (window.top !== window.self) {
+  try { window.top.location = window.location.href; } catch { document.documentElement.hidden = true; }
+}
+
 // ===== Появление блоков при прокрутке =====
 const revealItems = document.querySelectorAll('.reveal');
 
@@ -116,8 +123,12 @@ LOOPS.forEach(({ selector, secondsPerLap, direction }) => {
 // ===== Адреса: разбиваем название улицы на буквы для «волны» при наведении =====
 document.querySelectorAll('.places__street').forEach((street) => {
   const text = street.textContent;
-  street.setAttribute('aria-label', text);
   street.textContent = '';
+  // целый адрес для программ, которые читают сайт вслух; буквы для них скрыты
+  const label = document.createElement('span');
+  label.className = 'sr-only';
+  label.textContent = text;
+  street.append(label);
   let i = 0;
   text.split(' ').forEach((word, w) => {
     // слово целиком не переносится, переносы только между словами
@@ -142,10 +153,9 @@ const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').match
 const video = document.querySelector('.hero__video');
 const neon = document.querySelector('.neon');
 
-if (reduceMotion) {
-  video.removeAttribute('autoplay');
-  video.pause();
-} else {
+if (!reduceMotion) {
+  // видео без звука, поэтому браузеры разрешают запускать его сразу
+  video.play().catch(() => { /* если браузер запретил — остаётся красивый первый кадр */ });
   // первое включение длится 2,6 с (анимация flicker в styles.css)
   setTimeout(() => {
     neon.classList.add('is-lit');
