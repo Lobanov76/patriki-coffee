@@ -1,0 +1,8 @@
+# Настройки редактора и Claude — не часть сайта
+.claude/
+.vscode/
+
+# Системный мусор
+Thumbs.db
+desktop.ini
+.DS_Store

@@ -1,0 +1,438 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Патрики — кофейня в Ташкенте, 24/7</title>
+  <meta name="description" content="Патрики — круглосуточная кофейня в Ташкенте на Тараса Шевченко, 8, и мини-точки Monte by Patriki с кофе с собой. Кофе, чай, лимонады, выпечка и цитаты на меловой доске.">
+  <meta name="theme-color" content="#120d0b">
+
+  <!-- Иконки -->
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+
+  <!-- Карточка ссылки в Telegram, WhatsApp, Instagram и т. д.
+       После публикации заменить пути на полный адрес сайта: https://.../img/og-image.jpg -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Патрики">
+  <meta property="og:title" content="Патрики — кофейня в Ташкенте, 24/7">
+  <meta property="og:description" content="Увидимся на Патриках: кофе, чай, лимонады, выпечка и цитаты на меловой доске. Открыто круглосуточно.">
+  <meta property="og:image" content="img/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="ru_RU">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Forum&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=16">
+</head>
+<body>
+  <a class="skip" href="#menu">Перейти к меню</a>
+
+  <header class="topbar">
+    <a class="wordmark wordmark--spot" href="#top" aria-label="Патрики, на главную">Патрики</a>
+    <nav aria-label="Основная навигация">
+      <ul class="topbar__nav">
+        <li><a class="roll" href="#history"><span data-text="История">История</span></a></li>
+        <li><a class="roll" href="#about"><span data-text="О нас">О нас</span></a></li>
+        <li><a class="roll" href="#quotes"><span data-text="Цитаты">Цитаты</span></a></li>
+        <li><a class="roll" href="#menu"><span data-text="Меню">Меню</span></a></li>
+        <li><a class="roll" href="#places"><span data-text="Адреса">Адреса</span></a></li>
+      </ul>
+    </nav>
+    <a class="topbar__phone" href="tel:+998900030033">+998 90 003 00 33</a>
+  </header>
+
+  <main id="top">
+    <!-- Первый экран: живое видео эспрессо и неон поверх -->
+    <section class="hero">
+      <video class="hero__video" autoplay muted loop playsinline preload="auto" poster="video/espresso-poster.jpg" aria-hidden="true">
+        <source src="video/espresso.mp4" type="video/mp4">
+      </video>
+      <div class="hero__shade" aria-hidden="true"></div>
+
+      <div class="hero__content">
+        <p class="neon" aria-hidden="true">Патрики</p>
+        <h1>Увидимся на&nbsp;Патриках</h1>
+        <p class="hero__lead">Кофейня в Ташкенте, где на стенах ковры, над входом неон, а на каждом стакане своя фраза. Открыто круглосуточно.</p>
+        <div class="hero__actions">
+          <a class="btn btn--wine" href="#places">Как нас найти</a>
+          <a class="btn btn--ghost" href="#menu">Смотреть меню</a>
+        </div>
+      </div>
+
+      <dl class="hero__facts">
+        <div><dt>24/7</dt><dd>без выходных</dd></div>
+        <div><dt>+3</dt><dd>мини-точки Monte by Patriki</dd></div>
+        <div><dt>5,0</dt><dd>367 оценок на Яндекс Картах</dd></div>
+      </dl>
+    </section>
+
+    <!-- История -->
+    <section class="history" id="history" aria-labelledby="history-title">
+      <div class="history__head reveal">
+        <h2 id="history-title">История</h2>
+        <p>
+          «Увидимся на Патриках» — так в Москве зовут на встречу к Патриаршим прудам, где принято гулять
+          и никуда не спешить. В Ташкенте эта фраза стала названием кофейни и значит простое: встретимся за кофе.
+          Кофейня «Патрики» одна, на Тараса Шевченко, 8. А чтобы кофе был ближе, по городу открылись
+          мини-точки Monte by Patriki, где можно взять кофе и чай с собой.
+        </p>
+      </div>
+
+      <ol class="chapters">
+        <li class="chapter reveal">
+          <img src="img/neon-cup.jpg" alt="Неоновая вывеска «Патрики» ночью и какао в руке" width="720" height="1280" loading="lazy">
+          <h3>Неон</h3>
+          <p>Розовая вывеска над входом, чтобы найти нас даже в три часа ночи.</p>
+        </li>
+        <li class="chapter reveal">
+          <img src="img/cups-carpet.jpg" alt="Два холодных кофе на фоне ковра на стене" width="720" height="1280" loading="lazy">
+          <h3>Ковры</h3>
+          <p>Настоящие ковры на стенах, чтобы было по-домашнему, как у бабушки.</p>
+        </li>
+        <li class="chapter reveal">
+          <img src="img/cup-kraft2.jpg" alt="Стакан с наклейкой «Патрики — это второй дом, где всегда ждут»" width="900" height="1200" loading="lazy">
+          <h3>Стаканы</h3>
+          <p>Бордовая наклейка с фразой на каждом стакане, чтобы кофе поднимал настроение дважды.</p>
+        </li>
+      </ol>
+    </section>
+
+    <!-- О нас: душевное место, ковры -->
+    <section class="story" id="about" aria-labelledby="about-title">
+      <div class="story__text reveal">
+        <h2 id="about-title">О нас</h2>
+        <p class="story__lead">Душевное место, куда приходят не&nbsp;только за&nbsp;кофе.</p>
+        <p>
+          В «Патриках» легко случайно встретить знакомых, а можно специально позвать друзей,
+          сесть за столик и никуда не торопиться. Днём на веранде под тентом, ночью у неона.
+        </p>
+        <p>
+          На стенах настоящие ковры, на столах фирменные стаканы.
+          Заходят на минуту за кофе с собой, а остаются на час.
+        </p>
+      </div>
+      <figure class="story__carpet reveal">
+        <img src="img/stock/carpet.jpg" alt="Красный ковёр с геометрическим орнаментом крупным планом" width="700" height="1182" loading="lazy">
+      </figure>
+      <figure class="story__suzani reveal">
+        <img src="img/stock/suzani.jpg" alt="Вышитое сюзане с красным цветком-медальоном" width="700" height="1244" loading="lazy">
+      </figure>
+    </section>
+
+    <!-- Цитаты: меловая доска у входа, фото из сторис @patriki.tut -->
+    <section class="quotes" id="quotes" aria-labelledby="quotes-title">
+      <div class="quotes__head">
+        <h2 id="quotes-title">Цитаты с доски</h2>
+        <p>У входа висит меловая доска, и фраза на ней регулярно меняется. Вот некоторые из них, а новые появляются в Instagram. Наведите мышку, чтобы остановить ленту.</p>
+      </div>
+
+      <div class="loop quotes__viewport">
+      <ul class="loop__track quotes__track" id="quotes-track" aria-label="Фото меловой доски с цитатами">
+        <li class="shot">
+          <img src="img/boards/board-burnout.jpg" alt="Ты не выгорел(а), ты просто горел(а) не там" width="601" height="930" loading="lazy">
+        </li>
+        <li class="shot">
+          <img src="img/boards/board-place.webp" alt="Он сказал: «Я знаю классное место»… и повёл тебя к нервному срыву" width="662" height="1065" loading="lazy">
+        </li>
+        <li class="shot">
+          <img src="img/boards/board-dreams.webp" alt="С кем попало сны не снятся" width="664" height="1020" loading="lazy">
+        </li>
+        <li class="shot">
+          <img src="img/boards/board-car.webp" alt="Сдаются только слабаки и квартиры, а ты машина, которая только разгоняется" width="628" height="896" loading="lazy">
+        </li>
+        <li class="shot">
+          <img src="img/boards/board-energy.jpg" alt="Настроение: люди, откуда у вас энергия? Вам что, пять лет?" width="680" height="1121" loading="lazy">
+        </li>
+        <li class="shot">
+          <img src="img/boards/board-musk.webp" alt="Хочешь, подниму настроение? Тебе до миллиона долларов ближе, чем Илону Маску" width="620" height="697" loading="lazy">
+        </li>
+        <li class="shot">
+          <img src="img/boards/board-wrong.webp" alt="Иногда, чтобы всё пошло правильно, всё должно пойти не так" width="647" height="982" loading="lazy">
+        </li>
+        <li class="shot">
+          <img src="img/boards/board-love.webp" alt="Нужно хоть однажды в жизни полюбить, иначе вы так и будете думать, что любить прекрасно" width="674" height="1041" loading="lazy">
+        </li>
+        <li class="shot">
+          <img src="img/boards/board-pleasure.webp" alt="От меня уже давно нет никакого толку. Одно удовольствие" width="648" height="962" loading="lazy">
+        </li>
+        <li class="shot">
+          <img src="img/boards/board-smile.jpg" alt="Замечай прекрасное, люби эту жизнь, не расстраивайся по пустякам, возьми кофе и улыбнись" width="665" height="895" loading="lazy">
+        </li>
+      </ul>
+      </div>
+
+      <!-- Отзывы гостей с Яндекс Карт -->
+      <div class="reviews">
+        <div class="reviews__head reveal">
+          <h3>Отзывы гостей</h3>
+          <p class="reviews__score"><b>5,0</b> из 5 на Яндекс Картах, 367 оценок</p>
+        </div>
+        <div class="loop reviews__viewport">
+        <ul class="loop__track reviews__grid" id="reviews-track">
+          <li class="review">
+            <span class="review__stars" aria-label="5 из 5">★★★★★</span>
+            <blockquote>Очень уютное и атмосферное место, куда хочется возвращаться снова и снова.</blockquote>
+            <span class="review__name">Adelya A.</span>
+          </li>
+          <li class="review">
+            <span class="review__stars" aria-label="5 из 5">★★★★★</span>
+            <blockquote>Лучший кофе в городе! И атмосфера располагает на душевные разговоры.</blockquote>
+            <span class="review__name">Юлия С.</span>
+          </li>
+          <li class="review">
+            <span class="review__stars" aria-label="5 из 5">★★★★★</span>
+            <blockquote>Креативные бодрящие наклейки на стакане и очень дружелюбный персонал.</blockquote>
+            <span class="review__name">Evgeny G.</span>
+          </li>
+          <li class="review">
+            <span class="review__stars" aria-label="5 из 5">★★★★★</span>
+            <blockquote>Оригинальные стаканчики, которые всегда поднимают настроение.</blockquote>
+            <span class="review__name">Нигина Р.</span>
+          </li>
+          <li class="review">
+            <span class="review__stars" aria-label="5 из 5">★★★★★</span>
+            <blockquote>Бамбл вишнёвый, с апельсином и чай с алоэ вера — мои фавориты.</blockquote>
+            <span class="review__name">Ranius</span>
+          </li>
+          <li class="review">
+            <span class="review__stars" aria-label="5 из 5">★★★★★</span>
+            <blockquote>Самый любимый кофешоп! Классные баристы, классное руководство и лучшая матча.</blockquote>
+            <span class="review__name">Samirakhon M.</span>
+          </li>
+        </ul>
+        </div>
+        <a class="reviews__more ext" href="https://yandex.uz/maps/org/patriki/29390833188/reviews/" target="_blank" rel="noopener">Все отзывы на Яндекс Картах<svg class="ext__arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 L11 5 M6 5 H11 V10"/></svg></a>
+      </div>
+    </section>
+
+    <!-- Меню: каждая категория со своим крупным фото -->
+    <section class="menu" id="menu" aria-labelledby="menu-title">
+      <header class="menu__head reveal">
+        <h2 id="menu-title">Меню</h2>
+        <p>Цены в сумах, «к» значит тысяча: 30к — это 30&nbsp;000&nbsp;сумов.</p>
+      </header>
+
+      <article class="dish reveal">
+        <figure class="dish__photo">
+          <img src="img/stock/pour.jpg" alt="Бариста рисует латте-арт молоком из питчера" width="1600" height="2400" loading="lazy">
+        </figure>
+        <div class="dish__list">
+          <h3>Кофе</h3>
+          <ul class="items">
+            <li><span>Американо, эспрессо</span><i></i><b>30к</b></li>
+            <li><span>Капучино, латте</span><i></i><b>40к</b></li>
+            <li><span>Флэт уайт</span><i></i><b>45к</b></li>
+            <li><span>Раф</span><i></i><b>50к</b></li>
+            <li><span>Испанский латте</span><i></i><b>50к</b></li>
+            <li><span>Кокандский кофе</span><i></i><b>77к</b></li>
+          </ul>
+          <h4 class="extras__title">Добавки</h4>
+          <ul class="items items--small">
+            <li><span>Сироп</span><i></i><b>10к</b></li>
+            <li><span>Шот эспрессо</span><i></i><b>10к</b></li>
+            <li><span>Шот мёда</span><i></i><b>10к</b></li>
+            <li><span>Альтернативное молоко</span><i></i><b>15к</b></li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="dish dish--flip reveal">
+        <figure class="dish__photo">
+          <img src="img/stock/iced.jpg" alt="Холодный кофе со льдом, молоко смешивается с эспрессо" width="1200" height="1800" loading="lazy">
+        </figure>
+        <div class="dish__list">
+          <h3>Холодный кофе</h3>
+          <ul class="items">
+            <li><span>Айс американо</span><i></i><b>40к</b></li>
+            <li><span>Айс капучино</span><i></i><b>45к</b></li>
+            <li><span>Айс капучино на альтернативном молоке</span><i></i><b>55к</b></li>
+            <li><span>Бамбл с грейпфрутом</span><i></i><b>50к</b></li>
+            <li><span>Бамбл с апельсином</span><i></i><b>50к</b></li>
+            <li><span>Бамбл с вишней</span><i></i><b>50к</b></li>
+            <li><span>Фрапучино</span><i></i><b>60к</b></li>
+            <li><span>Лотус шейк</span><i></i><b>60к</b></li>
+            <li><span>Кофе по-андижански</span><i></i><b>100к</b></li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="dish reveal">
+        <figure class="dish__photo">
+          <img src="img/stock/matcha.jpg" alt="Матча латте с рисунком листа в белой чашке" width="1600" height="1067" loading="lazy">
+        </figure>
+        <div class="dish__list">
+          <h3>Матча</h3>
+          <ul class="items">
+            <li><span>Матча на молоке</span><i></i><b>50к</b></li>
+            <li><span>Матча на альтернативном молоке</span><i></i><b>60к</b></li>
+            <li><span>Матча манго</span><i></i><b>60к</b></li>
+            <li><span>Яблочная матча</span><i></i><b>60к</b></li>          </ul>
+        </div>
+      </article>
+
+      <article class="dish dish--flip reveal">
+        <figure class="dish__photo">
+          <img src="img/stock/orange.jpg" alt="Высокий стакан апельсинового фреша с долькой лимона" width="1600" height="2400" loading="lazy">
+        </figure>
+        <div class="dish__list">
+          <h3>Фреши</h3>
+          <ul class="items">
+            <li><span>Фреш апельсиновый</span><i></i><b>60к</b></li>
+            <li><span>Фреш грейпфрутовый</span><i></i><b>75к</b></li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="dish reveal">
+        <figure class="dish__photo">
+          <img src="img/stock/lemonade.jpg" alt="Высокий стакан лимонада с дольками лимона и льдом" width="1400" height="2135" loading="lazy">
+        </figure>
+        <div class="dish__list">
+          <h3>Лимонады</h3>
+          <ul class="items">
+            <li><span>Вишнёвый</span><i></i><b>60к</b></li>
+            <li><span>Базилик-лимон</span><i></i><b>60к</b></li>
+            <li><span>Манго-маракуйя</span><i></i><b>60к</b></li>
+            <li><span>Ягодный</span><i></i><b>60к</b></li>
+            <li><span>Грушевый</span><i></i><b>60к</b></li>
+            <li><span>Клубничный</span><i></i><b>60к</b></li>
+            <li><span>Малиновый</span><i></i><b>60к</b></li>
+            <li><span>Черника-юдзу</span><i></i><b>60к</b></li>
+            <li><span>Мандаринка</span><i></i><b>60к</b></li>
+            <li><span>Сквозняк</span><i></i><b>70к</b></li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="dish dish--flip reveal">
+        <figure class="dish__photo">
+          <img src="img/stock/tea.jpg" alt="Янтарный чай льют в стеклянную чашку" width="1200" height="1799" loading="lazy">
+        </figure>
+        <div class="dish__list">
+          <h3>Чай</h3>
+          <ul class="items items--two">
+            <li><span>Алоэ вера</span><i></i><b>40к</b></li>
+            <li><span>Ягодный</span><i></i><b>40к</b></li>
+            <li><span>Шиповник</span><i></i><b>40к</b></li>
+            <li><span>Моргентау</span><i></i><b>40к</b></li>
+            <li><span>Эксклюзивные</span><i></i><b>40к</b></li>
+            <li><span>Афганский</span><i></i><b>40к</b></li>
+            <li><span>Марокканский</span><i></i><b>40к</b></li>
+            <li><span>Облепиховый</span><i></i><b>40к</b></li>
+            <li><span>Самаркандский</span><i></i><b>40к</b></li>
+            <li><span>Джизахский</span><i></i><b>40к</b></li>
+            <li><span>Имбирный</span><i></i><b>40к</b></li>
+            <li><span>Пуэр</span><i></i><b>50к</b></li>
+            <li><span>Казахский</span><i></i><b>50к</b></li>
+            <li><span>Облепиха-маракуйя</span><i></i><b>50к</b></li>
+          </ul>
+        </div>
+      </article>
+    </section>
+
+    <!-- Выпечка: настоящие фото из сторис @patriki.tut -->
+    <section class="bakery" id="bakery" aria-labelledby="bakery-title">
+      <header class="bakery__head reveal">
+        <h2 id="bakery-title">Выпечка к&nbsp;кофе</h2>
+        <p>Сладкая и сытная. Что сегодня на витрине, подскажет бариста.</p>
+      </header>
+      <ul class="pastries">
+        <li class="pastry reveal">
+          <img src="img/bakery/vatrushka.webp" alt="Ватрушка с творожным кремом на белой тарелке" width="653" height="1102" loading="lazy">
+          <h3>Ватрушка</h3>
+          <p>Нежное тесто и творожный крем. Классика для кофе-паузы.</p>
+        </li>
+        <li class="pastry reveal">
+          <img src="img/bakery/apple-cinnamon.webp" alt="Слойка с яблоком и корицей, посыпанная сахаром" width="659" height="1105" loading="lazy">
+          <h3>Яблоко с&nbsp;корицей</h3>
+          <p>Тающее тесто, карамелизированные яблоки и пряная корица.</p>
+        </li>
+        <li class="pastry reveal">
+          <img src="img/bakery/croissant-chicken.webp" alt="Круассан с курицей, индейкой и салатом в бумажной обёртке" width="667" height="1138" loading="lazy">
+          <h3>Круассан с&nbsp;курицей и&nbsp;индейкой</h3>
+          <p>Слоёное тесто и щедрая начинка. Сытный перекус на бегу.</p>
+        </li>
+        <li class="pastry reveal">
+          <img src="img/bakery/sausage-roll.webp" alt="Сосиска в тесте с кунжутом на белой тарелке" width="687" height="1112" loading="lazy">
+          <h3>Сосиска в&nbsp;тесте</h3>
+          <p>Пышное тесто и сочная сосиска. Тот самый вкус детства.</p>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Атмосфера: реальные фото кофейни -->
+    <section class="mood" aria-labelledby="mood-title">
+      <div class="mood__head reveal">
+        <h2 id="mood-title">Днём веранда, ночью неон</h2>
+        <ul class="facts">
+          <li>Летняя веранда</li>
+          <li>Можно с животными</li>
+          <li>Wi-Fi</li>
+          <li>Оплата картой</li>
+          <li>Доставка</li>
+          <li>Кофе с собой</li>
+        </ul>
+      </div>
+      <div class="mood__grid">
+        <img class="m1 reveal" src="img/exterior.jpg" alt="«Патрики» на углу улицы Тараса Шевченко, веранда под тентом" width="900" height="527" loading="lazy">
+        <img class="m2 reveal" src="img/stock/barista.jpg" alt="Бариста прессует молотый кофе темпером" width="1600" height="2400" loading="lazy">
+        <img class="m3 reveal" src="img/interior.jpg" alt="Полки с сиропами и стопками фирменных стаканов у бара «Патриков»" width="900" height="1200" loading="lazy">
+        <img class="m4 reveal" src="img/stock/beans.jpg" alt="Обжаренные кофейные зёрна крупным планом" width="1600" height="1200" loading="lazy">
+      </div>
+    </section>
+
+    <!-- Адреса -->
+    <section class="places" id="places" aria-labelledby="places-title">
+      <h2 id="places-title" class="reveal">Где нас найти</h2>
+      <p class="places__lead reveal">Работаем круглосуточно. Телефон один на все точки: <a href="tel:+998900030033">+998 90 003 00 33</a>.</p>
+
+      <!-- Единственная кофейня «Патрики» -->
+      <div class="places__main reveal">
+        <div>
+          <h3>Патрики</h3>
+          <p>Кофейня с коврами, неоном и летней верандой. Здесь можно сесть, никуда не торопиться и встретиться с друзьями.</p>
+        </div>
+        <div class="places__main-addr">
+          <span class="places__street">ул. Тараса Шевченко, 8</span>
+          <span class="places__hint">Рядом с метро «Мингурюк»</span>
+          <a href="https://yandex.uz/maps/org/patriki/29390833188/" target="_blank" rel="noopener" class="roll"><span data-text="Открыть на карте">Открыть на карте</span></a>
+        </div>
+      </div>
+
+      <!-- Мини-точки: кофе с собой -->
+      <div class="places__sub reveal">
+        <h3>Monte by Patriki</h3>
+        <p>Мини-точки «Патриков»: кофе, чай и лимонады с собой.</p>
+      </div>
+      <ul class="places__list">
+        <li class="reveal">
+          <span class="places__street">ул. Тараса Шевченко, 36Б</span>
+          <a href="https://yandex.uz/maps/?text=Ташкент%20Тараса%20Шевченко%2036Б" target="_blank" rel="noopener" class="roll"><span data-text="Открыть на карте">Открыть на карте</span></a>
+        </li>
+        <li class="reveal">
+          <span class="places__street">1-я ул. Мавляна Риёзи, 1</span>
+          <a href="https://yandex.uz/maps/?text=Ташкент%201-я%20улица%20Мавляна%20Риёзи%201" target="_blank" rel="noopener" class="roll"><span data-text="Открыть на карте">Открыть на карте</span></a>
+        </li>
+        <li class="reveal">
+          <span class="places__street">ул. Эльбека, 61/3</span>
+          <a href="https://yandex.uz/maps/?text=Monte%20by%20Patriki%20Эльбека%2061%2F3%20Ташкент" target="_blank" rel="noopener" class="roll"><span data-text="Открыть на карте">Открыть на карте</span></a>
+        </li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__row">
+      <span class="wordmark">Патрики</span>
+      <a href="https://www.instagram.com/patriki.tut/" target="_blank" rel="noopener">Instagram @patriki.tut</a>
+      <a href="tel:+998900030033">+998 90 003 00 33</a>
+    </div>
+  </footer>
+
+  <script src="script.js?v=13"></script>
+</body>
+</html>
