@@ -79,6 +79,7 @@ a { color: inherit; }
   list-style: none;
   margin: 0;
   padding: 0;
+  white-space: nowrap;   /* «О нас» не разваливается на две строки */
 }
 /* Фирменное бордовое пятно под словом «Патрики», как их круглый логотип */
 .wordmark--spot {
@@ -167,6 +168,7 @@ a { color: inherit; }
   max-width: 760px;
   padding: 120px var(--gutter) 160px;
 }
+
 
 /* Неон, как настоящая вывеска над входом */
 .neon {
@@ -361,33 +363,29 @@ img.reveal:not(.is-in) { transform: scale(1.08); }
 .quotes__head p { grid-column: 1; margin: 0; max-width: 52ch; color: var(--muted); }
 
 /* ===== Бесконечная лента (цитаты и отзывы) =====
-   script.js дублирует карточки, лента сдвигается на половину длины и незаметно начинается заново */
+   Двигает её script.js: сама едет, тянется пальцем или мышкой и после «броска» катится по инерции */
 .loop {
   overflow: hidden;
+  touch-action: pan-y;          /* вертикальная прокрутка страницы остаётся, горизонтальный свайп забирает лента */
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
           mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
 }
+.loop.is-dragging { cursor: grabbing; }
+.loop img { -webkit-user-drag: none; pointer-events: none; }
 .loop__track {
   display: flex;
   width: max-content;
   margin: 0;
   padding: 8px 0;
   list-style: none;
-  animation: marquee var(--loop-time, 45s) linear infinite;
-}
-.loop:hover .loop__track,
-.loop:focus-within .loop__track { animation-play-state: paused; }
-@keyframes marquee {
-  to { transform: translateX(-50%); }
-}
-@media (prefers-reduced-motion: reduce) {
-  .loop { overflow-x: auto; }
-  .loop__track { animation: none; }
+  will-change: transform;
 }
 
-/* Цитаты едут в обратную сторону от отзывов и чуть медленнее */
+/* Цитаты едут в обратную сторону от отзывов и чуть медленнее (скорость задаётся в script.js) */
 .quotes__viewport { margin-top: 40px; }
-.quotes__track { --loop-time: 60s; animation-direction: reverse; }
 /* Доски разной формы: у всех одна высота, ширина по пропорциям фото, чтобы мел не обрезался */
 .shot {
   flex: none;
@@ -765,8 +763,12 @@ img.reveal:not(.is-in) { transform: scale(1.08); }
   .places__main { grid-template-columns: 1fr; }
   .pastries { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 16px; }
 }
-@media (max-width: 760px) {
+@media (max-width: 1024px) {
+  /* на планшете телефону в шапке тесно, он есть в адресах и подвале */
   .topbar__phone { display: none; }
+  .topbar__nav { gap: 22px; }
+}
+@media (max-width: 760px) {
   .dish { grid-template-columns: 1fr; }
   .dish--flip .dish__photo { order: 0; }
   .dish__photo { aspect-ratio: 4 / 3; }
@@ -796,4 +798,41 @@ img.reveal:not(.is-in) { transform: scale(1.08); }
   .places__list li { min-height: 0; }
   .pastry h3 { font-size: 1.3rem; }
   .pastry p { font-size: .88rem; }
+}
+
+/* Вертикальные экраны (телефон, планшет): горизонтальное видео не растягиваем на весь экран,
+   иначе от кадра остаётся только металл между носиками кофемашины. Ставим его сверху
+   в пропорции 4:3 — видны оба носика, капли эспрессо и чашка, — а текст идёт ниже. */
+@media (max-aspect-ratio: 1/1) {
+  .hero {
+    display: block;
+    min-height: 0;
+    padding-top: 112px;      /* место под логотип и меню, чтобы они не закрывали кадр */
+    padding-bottom: 36px;
+  }
+  .hero__video {
+    position: relative;
+    inset: auto;
+    z-index: 0;
+    display: block;
+    height: auto;
+    aspect-ratio: 4 / 3;
+  }
+  .hero__shade {
+    inset: 112px 0 auto;
+    z-index: 1;
+    aspect-ratio: 4 / 3;
+    /* сверху лёгкое затемнение под меню, снизу кадр растворяется в фоне страницы */
+    background: linear-gradient(180deg, var(--espresso) 0%, transparent 18%, transparent 55%, var(--espresso) 100%);
+  }
+  .hero__content {
+    position: relative;
+    z-index: 2;
+    margin: -20vw auto 0;   /* неон «ПАТРИКИ» ложится на нижний край видео */
+    padding: 0 var(--gutter) 32px;
+  }
+  .hero__facts {
+    position: static;
+    padding-top: 8px;
+  }
 }
