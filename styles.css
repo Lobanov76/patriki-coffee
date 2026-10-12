@@ -799,8 +799,18 @@ img.reveal:not(.is-in) { transform: scale(1.08); }
   .history__head { grid-template-columns: 1fr; }
 }
 @media (max-width: 640px) {
-  .chapters { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
-  .chapter { flex: 0 0 78%; scroll-snap-align: start; }
+  /* На телефоне главы истории — строками друг под другом, без бокового листания:
+     иначе лента перехватывает свайп и страница «застревает» при прокрутке вниз */
+  .chapters { grid-template-columns: 1fr; gap: 16px; }
+  .chapter {
+    display: grid;
+    grid-template-columns: 38% 1fr;
+    grid-template-rows: 1fr 1fr;
+    column-gap: 16px;
+  }
+  .chapter img { grid-row: 1 / 3; aspect-ratio: 3 / 4; }   /* фото слева на всю высоту */
+  .chapter h3 { grid-column: 2; align-self: end; margin: 0; font-size: 1.7rem; }
+  .chapter p { grid-column: 2; align-self: start; margin-top: 6px; font-size: .95rem; }
 }
 @media (max-width: 560px) {
   .topbar { flex-wrap: wrap; gap: 14px; padding-top: 16px; }
