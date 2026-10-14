@@ -5,6 +5,23 @@ if (window.top !== window.self) {
   try { window.top.location = window.location.href; } catch { document.documentElement.hidden = true; }
 }
 
+// ===== Меню «три полоски» на телефоне =====
+// Нажали на кнопку — меню раскрылось; нажали на раздел — меню закрылось, страница едет к разделу.
+const burger = document.querySelector('.burger');
+const siteNav = document.getElementById('site-nav');
+
+function setMenu(open) {
+  burger.setAttribute('aria-expanded', String(open));
+  burger.setAttribute('aria-label', open ? 'Закрыть меню' : 'Открыть меню');
+  siteNav.classList.toggle('is-open', open);
+  document.body.classList.toggle('menu-open', open);
+}
+burger.addEventListener('click', () => setMenu(burger.getAttribute('aria-expanded') !== 'true'));
+siteNav.addEventListener('click', (e) => { if (e.target.closest('a')) setMenu(false); });
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setMenu(false); });
+// повернули телефон или расширили окно до компьютерного — меню закрываем
+window.matchMedia('(max-width: 760px)').addEventListener('change', () => setMenu(false));
+
 // ===== Появление блоков при прокрутке =====
 const revealItems = document.querySelectorAll('.reveal');
 
@@ -156,8 +173,13 @@ const neon = document.querySelector('.neon');
 if (!reduceMotion) {
   // видео без звука, поэтому браузеры разрешают запускать его сразу
   video.play().catch(() => { /* если браузер запретил — остаётся красивый первый кадр */ });
-  // первое включение длится 2,6 с (анимация flicker в styles.css)
-  setTimeout(() => {
+}
+
+// Неон загорается, когда исчезла заставка (вызывается из блока «Заставка» ниже)
+function startNeon() {
+  if (reduceMotion) return;
+  document.body.classList.add('is-ready');  // запускает «мерцающее» включение (flicker в styles.css)
+  setTimeout(() => {                        // flicker длится 2,6 с
     neon.classList.add('is-lit');
     scheduleGlitch();
   }, 2600);
@@ -171,3 +193,77 @@ function scheduleGlitch() {
     scheduleGlitch();
   }, delay);
 }
+
+// ===== Заставка: обжарка зерна =====
+// Пока сайт грузится, зерно меняет цвет от зелёного до тёмного, внизу заполняется полоска.
+// В конце надпись «Готово». Заставка видна минимум 1,8 с и максимум 5 с — даже на медленном интернете.
+(function roast() {
+  const pre = document.getElementById('preloader');
+  if (!pre || reduceMotion) { if (pre) pre.remove(); startNeon(); return; }
+
+  const MIN_MS = 1800;
+  const MAX_MS = 5000;
+  // цвета зерна по ходу обжарки: свет, середина, тень, бороздка
+  const COLORS = [
+    { at: 0,   c: ['#c5cd88', '#8d9c5e', '#4a552c', '#36401c'] },  // зелёное
+    { at: .35, c: ['#e6c48e', '#c4945a', '#86592f', '#5e3d1f'] },  // светлая обжарка
+    { at: .7,  c: ['#b97f4c', '#86512c', '#4a2a16', '#2a170b'] },  // средняя
+    { at: 1,   c: ['#7d5034', '#4a2b1a', '#21120a', '#100804'] },  // тёмная
+  ];
+  const stops = ['bean-light', 'bean-mid', 'bean-dark'].map((id) => document.getElementById(id));
+  const crease = document.getElementById('bean-crease');
+  const shine = document.getElementById('bean-shine');
+  const label = document.getElementById('preloader-stage');
+  const bar = document.getElementById('preloader-bar');
+
+  const start = performance.now();
+  let loaded = document.readyState === 'complete';
+  let progress = 0;
+  let finished = false;
+  window.addEventListener('load', () => { loaded = true; });
+
+  const hex = (h) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16));
+  const mix = (a, b, t) => {
+    const [x, y] = [hex(a), hex(b)];
+    return `rgb(${x.map((v, i) => Math.round(v + (y[i] - v) * t)).join(',')})`;
+  };
+
+  function paint(p) {
+    // находим две соседние стадии и плавно смешиваем их цвета
+    let i = 0;
+    while (i < COLORS.length - 2 && p > COLORS[i + 1].at) i++;
+    const a = COLORS[i];
+    const b = COLORS[i + 1];
+    const t = Math.min(Math.max((p - a.at) / (b.at - a.at), 0), 1);
+    stops.forEach((stop, k) => stop.setAttribute('stop-color', mix(a.c[k], b.c[k], t)));
+    crease.setAttribute('stroke', mix(a.c[3], b.c[3], t));
+    shine.style.opacity = (0.3 + p * 0.25).toFixed(3);  // к концу зерно маслянисто блестит
+    bar.style.transform = `scaleX(${p})`;
+  }
+
+  function finish() {
+    if (finished) return;
+    finished = true;
+    paint(1);                       // зерно всегда доходит до тёмной обжарки
+    label.textContent = 'Готово';
+    pre.classList.add('is-roasted');
+    setTimeout(() => {              // даём полсекунды увидеть «Готово»
+      pre.classList.add('is-done');
+      startNeon();
+      setTimeout(() => pre.remove(), 700);
+    }, 500);
+  }
+
+  function tick(now) {
+    const elapsed = now - start;
+    // пока страница грузится, обжарка идёт до 90 %; когда загрузилась — доходит до конца
+    const target = (loaded && elapsed >= MIN_MS) || elapsed >= MAX_MS ? 1 : Math.min(0.9, elapsed / (MIN_MS * 1.4));
+    progress += (target - progress) * 0.08;
+    if (target === 1 && progress > 0.985) progress = 1;
+    paint(progress);
+    if (progress >= 1) { finish(); return; }
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+  setTimeout(finish, MAX_MS + 1500);  // страховка, если вкладка была в фоне и анимация стояла
+})();

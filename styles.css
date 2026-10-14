@@ -50,6 +50,81 @@ a { color: inherit; }
   border-radius: 4px;
 }
 
+/* ===== Заставка: обжарочный барабан ===== */
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  /* чистый фирменный бордовый, к краям темнее — без текстур, чтобы не было мутно */
+  background: radial-gradient(circle at 50% 45%, #7d1b2d 0%, #4b0f1b 55%, #23060c 100%);
+  transition: opacity .6s ease, visibility .6s;
+  /* страховка: если скрипт не сработал, заставка всё равно исчезнет через 6 секунд */
+  animation: preloader-failsafe .6s ease 6s forwards;
+}
+.preloader.is-done { opacity: 0; visibility: hidden; }
+@keyframes preloader-failsafe { to { opacity: 0; visibility: hidden; } }
+
+/* Зерно: крупно по центру, мягко покачивается, как в барабане ростера */
+.preloader__bean {
+  width: 112px;
+  animation: bean-tumble 1.8s ease-in-out infinite;
+}
+@keyframes bean-tumble {
+  0%, 100% { transform: rotate(-12deg) translateY(0); }
+  50%      { transform: rotate(8deg) translateY(-6px); }
+}
+.bean-svg { display: block; width: 100%; height: auto; overflow: visible; }
+.bean-svg__shadow { fill: #000; opacity: .45; }
+.bean-svg__crease { fill: none; stroke-width: 7; stroke-linecap: round; }
+.bean-svg__lip { fill: none; stroke: #fff; stroke-opacity: .22; stroke-width: 2; stroke-linecap: round; }
+.bean-svg__shine { fill: #fff; opacity: .3; }
+
+/* три точки после «Обжариваем зерно» появляются по очереди */
+.preloader__dots::after {
+  content: "";
+  display: inline-block;
+  width: 1.2em;
+  text-align: left;
+  animation: preloader-dots 1.2s steps(4) infinite;
+}
+@keyframes preloader-dots {
+  0%   { content: ""; }
+  25%  { content: "."; }
+  50%  { content: ".."; }
+  75%  { content: "..."; }
+}
+.preloader.is-roasted .preloader__dots { display: none; }
+.preloader__stage {
+  margin: 0;
+  font-family: var(--display);
+  font-style: italic;
+  font-size: 1.35rem;
+  color: #efe2c8;
+  min-height: 1.6em;
+}
+.preloader__bar {
+  width: 160px;
+  height: 3px;
+  margin-top: -8px;
+  background: rgba(239, 226, 200, .2);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.preloader__bar span {
+  display: block;
+  height: 100%;
+  background: #efe2c8;
+  transform: scaleX(0);
+  transform-origin: left;
+}
+@media (prefers-reduced-motion: reduce) {
+  .preloader { display: none; }
+}
 /* Текст только для программ, которые читают сайт вслух: на экране его не видно */
 .sr-only {
   position: absolute;
@@ -148,6 +223,7 @@ a { color: inherit; }
 .topbar__nav a:hover,
 .topbar__phone:hover { color: var(--cream); }
 .topbar__phone { margin-left: auto; }
+.burger { display: none; }
 
 /* ===== Первый экран: видео ===== */
 .hero {
@@ -198,9 +274,10 @@ a { color: inherit; }
     0 0 24px var(--neon),
     0 0 52px #d42fb0,
     0 0 100px #a01a8a;
-  animation: flicker 2.6s linear both;
 }
-/* Единственная анимация при загрузке: неон загорается с парой «мерцаний» */
+/* Неон загорается с парой «мерцаний», когда исчезла заставка (класс is-ready ставит script.js).
+   Без JavaScript неон просто горит ровно. */
+.is-ready .neon { animation: flicker 2.6s linear both; }
 @keyframes flicker {
   0%, 18% { opacity: .06; text-shadow: none; }
   20% { opacity: 1; }
@@ -813,10 +890,6 @@ img.reveal:not(.is-in) { transform: scale(1.08); }
   .chapter p { grid-column: 2; align-self: start; margin-top: 6px; font-size: .95rem; }
 }
 @media (max-width: 560px) {
-  .topbar { flex-wrap: wrap; gap: 14px; padding-top: 16px; }
-  .topbar nav { width: 100%; overflow-x: auto; scrollbar-width: none; }
-  .topbar__nav { gap: 18px; white-space: nowrap; }
-  .wordmark { font-size: 1.2rem; }
   .places__list { grid-template-columns: 1fr; }
   .places__list li { min-height: 0; }
   .pastry h3 { font-size: 1.3rem; }
@@ -858,4 +931,120 @@ img.reveal:not(.is-in) { transform: scale(1.08); }
     position: static;
     padding-top: 8px;
   }
+}
+
+/* ===== Телефон: бордовая шапка и меню «три полоски» =====
+   Шапка — отдельная бордовая полоса, всегда сверху. Слева кнопка меню, по центру «Патрики».
+   Меню раскрывается на весь экран крупными пунктами; нажали — страница едет к разделу. */
+@media (max-width: 760px) {
+  :root { --bar: 56px; }
+  html { scroll-padding-top: var(--bar); }   /* раздел не прячется под шапкой */
+
+  .topbar {
+    position: fixed;
+    height: var(--bar);
+    padding: 0 calc(var(--gutter) - 10px);
+    display: grid;
+    grid-template-columns: 44px 1fr 44px;
+    gap: 0;
+    background: #3e0c15;                                  /* глубокий бордовый, без перехода */
+    box-shadow: inset 0 -1px 0 rgba(242, 232, 218, .12);  /* тонкая светлая линия снизу */
+  }
+  /* логотип просто буквами с широкой разрядкой — пятно на бордовой полосе выглядело грубо */
+  .wordmark--spot {
+    grid-column: 2;
+    justify-self: center;
+    padding: 0;
+    font-size: 1.05rem;
+    letter-spacing: .32em;
+    margin-right: -.32em;   /* разрядка добавляет хвост справа — возвращаем ровный центр */
+  }
+  .wordmark--spot::before { display: none; }
+
+  .burger {
+    grid-column: 1;
+    grid-row: 1;
+    display: grid;
+    place-content: center;
+    gap: 7px;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+  }
+  .burger span {
+    display: block;
+    width: 20px;
+    height: 1px;
+    background: var(--cream);
+    border-radius: 1px;
+    transition: transform .35s cubic-bezier(.6, 0, .2, 1), opacity .2s;
+  }
+  /* открыто — полоски складываются в крестик */
+  .burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+  .burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+  .burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+  .topbar__menu {
+    position: fixed;
+    inset: var(--bar) 0 0;
+    padding: 28px var(--gutter) 40px;
+    background:
+      linear-gradient(180deg, rgba(62, 12, 21, .7) 0%, transparent 35%),
+      var(--espresso);
+    overflow-y: auto;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity .3s, visibility 0s .3s;
+  }
+  .topbar__menu.is-open {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity .3s;
+  }
+  .topbar__nav {
+    flex-direction: column;
+    gap: 0;
+  }
+  .topbar__nav li {
+    border-bottom: 1px solid var(--line);
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity .4s, transform .4s cubic-bezier(.2, .7, .2, 1);
+  }
+  /* пункты появляются по очереди */
+  .topbar__menu.is-open li { opacity: 1; transform: none; }
+  .topbar__menu.is-open li:nth-child(2) { transition-delay: .04s; }
+  .topbar__menu.is-open li:nth-child(3) { transition-delay: .08s; }
+  .topbar__menu.is-open li:nth-child(4) { transition-delay: .12s; }
+  .topbar__menu.is-open li:nth-child(5) { transition-delay: .16s; }
+  .topbar__nav a {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    padding: 16px 0;
+    font-family: var(--display);
+    font-style: italic;          /* как «Увидимся на Патриках» на первом экране */
+    font-weight: 500;
+    font-size: 2.3rem;
+    line-height: 1.1;
+    color: var(--cream);
+  }
+  .topbar__nav a:active { color: #e7a3ad; }
+  .roll span::after { display: none; }   /* «прокрутка» слова нужна только мышке */
+  .roll:hover span, .roll:focus-visible span { transform: none; }
+
+  body.menu-open { overflow: hidden; }   /* под открытым меню страница не листается */
+
+  /* видео начинается сразу под бордовой полосой, без тёмной ступеньки */
+  .hero { padding-top: var(--bar); }
+  .hero__shade {
+    inset: var(--bar) 0 auto;
+    background: linear-gradient(180deg, rgba(18, 13, 11, .35) 0%, transparent 16%, transparent 55%, var(--espresso) 100%);
+  }
+}
+@media (max-width: 760px) and (prefers-reduced-motion: reduce) {
+  .topbar__menu, .topbar__nav li, .burger span { transition: none; }
 }

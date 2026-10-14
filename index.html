@@ -32,14 +32,47 @@
   <meta name="referrer" content="strict-origin-when-cross-origin">
 
   <link rel="stylesheet" href="fonts/fonts.css">
-  <link rel="stylesheet" href="styles.css?v=24">
+  <link rel="stylesheet" href="styles.css?v=35">
 </head>
 <body>
+  <!-- Заставка при загрузке: зерно обжаривается от зелёного до тёмного. Управляет script.js -->
+  <div class="preloader" id="preloader" aria-hidden="true">
+    <div class="preloader__bean">
+      <svg class="bean-svg" viewBox="0 0 120 170">
+        <defs>
+          <radialGradient id="bean-base" cx="38%" cy="32%" r="72%">
+            <stop offset="0" id="bean-light" stop-color="#c5cd88"/>
+            <stop offset=".55" id="bean-mid" stop-color="#8d9c5e"/>
+            <stop offset="1" id="bean-dark" stop-color="#4a552c"/>
+          </radialGradient>
+          <linearGradient id="bean-side" x1="0" y1="0" x2="1" y2=".25">
+            <stop offset=".45" stop-color="#000" stop-opacity="0"/>
+            <stop offset="1" stop-color="#000" stop-opacity=".38"/>
+          </linearGradient>
+          <filter id="bean-soft" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="3.5"/>
+          </filter>
+        </defs>
+        <ellipse class="bean-svg__shadow" cx="62" cy="158" rx="36" ry="6" filter="url(#bean-soft)"/>
+        <path d="M60 10 C92 10 108 48 106 86 C104 126 84 152 58 152 C30 152 14 122 14 84 C14 46 30 10 60 10 Z" fill="url(#bean-base)"/>
+        <path d="M60 10 C92 10 108 48 106 86 C104 126 84 152 58 152 C30 152 14 122 14 84 C14 46 30 10 60 10 Z" fill="url(#bean-side)"/>
+        <path id="bean-crease" class="bean-svg__crease" d="M63 20 C43 54 81 100 56 142" stroke="#36401c"/>
+        <path class="bean-svg__lip" d="M67 22 C48 55 86 101 61 141"/>
+        <ellipse id="bean-shine" class="bean-svg__shine" cx="40" cy="50" rx="9" ry="22" transform="rotate(-18 40 50)" filter="url(#bean-soft)"/>
+      </svg>
+    </div>
+    <p class="preloader__stage"><span id="preloader-stage">Обжариваем зерно</span><span class="preloader__dots"></span></p>
+    <div class="preloader__bar"><span id="preloader-bar"></span></div>
+  </div>
   <a class="skip" href="#menu">Перейти к меню</a>
 
   <header class="topbar">
+    <!-- Кнопка «три полоски» видна только на телефоне, открывает меню (script.js) -->
+    <button class="burger" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Открыть меню">
+      <span></span><span></span><span></span>
+    </button>
     <a class="wordmark wordmark--spot" href="#top" aria-label="Патрики, на главную">Патрики</a>
-    <nav aria-label="Основная навигация">
+    <nav class="topbar__menu" id="site-nav" aria-label="Основная навигация">
       <ul class="topbar__nav">
         <li><a class="roll" href="#history"><span data-text="История">История</span></a></li>
         <li><a class="roll" href="#about"><span data-text="О нас">О нас</span></a></li>
@@ -439,6 +472,6 @@
     </div>
   </footer>
 
-  <script src="script.js?v=22"></script>
+  <script src="script.js?v=33"></script>
 </body>
 </html>
